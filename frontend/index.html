@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentHotel - Connect Students with Hotels</title>
     <meta name="description" content="A platform connecting students with nearby hotels for daily mess and services" />
+    <script>
+      // Check for redirected URL from 404.html
+      (function(l) {
+        if (sessionStorage.redirect) {
+          var redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          l.replace(redirect);
+        }
+      }(window.location))
+    </script>
   </head>
   <body>
     <div id="root"></div>
