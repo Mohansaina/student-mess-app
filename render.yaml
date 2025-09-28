@@ -3,19 +3,22 @@ services:
     name: student-mess-backend
     runtime: node
     plan: free
+    region: oregon
     buildCommand: cd backend && npm install
-    startCommand: cd backend && npm start
+    startCommand: cd backend && node src/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
       - key: DB_URI
-        value: mongodb+srv://studentmess:SecurePass2024@cluster0.mongodb.net/studenthotel
+        value: mongodb+srv://studentmess:SecurePassword2024@cluster0.mongodb.net/studenthotel
       - key: JWT_SECRET
-        value: student-mess-ultra-secure-jwt-secret-production-2024-deployment
+        value: student-mess-ultra-secure-jwt-production-key-2024
       - key: JWT_REFRESH_SECRET
-        value: student-mess-refresh-token-ultra-secure-production-2024-deployment
+        value: student-mess-ultra-secure-refresh-production-key-2024
       - key: JWT_EXPIRES_IN
         value: 1h
       - key: JWT_REFRESH_EXPIRES_IN
@@ -34,7 +37,3 @@ services:
         value: 100
       - key: BCRYPT_SALT_ROUNDS
         value: 12
-
-databases:
-  - name: student-mess-db
-    plan: free
