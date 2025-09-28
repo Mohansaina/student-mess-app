@@ -15,12 +15,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  # Simple deployment job since it's just a static site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -37,22 +41,20 @@ jobs:
         run: |
           cd frontend
           npm run build
-
+          
+      - name: Copy files to root
+        run: |
+          cp -r frontend/dist/* .
+          cp frontend/dist/index.html ./app.html
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './frontend/dist'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+          path: '.'
+      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
