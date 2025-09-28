@@ -1,16 +1,27 @@
-# Copy these environment variables to Railway:
+# Copy these EXACT environment variables to Railway:
 
-DB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/studenthotel
-JWT_SECRET=super-secret-jwt-key-change-this-in-production-make-it-long
-JWT_REFRESH_SECRET=super-secret-refresh-key-also-make-this-very-long-random
+# Database (replace with your MongoDB Atlas connection string)
+DB_URI=mongodb+srv://your-username:your-password@cluster0.xxxxx.mongodb.net/studenthotel
+
+# JWT Secrets (use these exact values)
+JWT_SECRET=student-mess-super-secret-jwt-key-production-2024-secure
+JWT_REFRESH_SECRET=student-mess-refresh-token-secret-key-production-2024-secure
 JWT_EXPIRES_IN=1h
 JWT_REFRESH_EXPIRES_IN=7d
+
+# Server Configuration
 NODE_ENV=production
 PORT=3001
+
+# CORS (your GitHub Pages URL)
 FRONTEND_URL=https://mohansaina.github.io/student-mess-app
+
+# File Upload
 UPLOAD_PATH=./uploads
 MAX_FILE_SIZE=5242880
 USE_S3=false
+
+# Security
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 BCRYPT_SALT_ROUNDS=12
