@@ -1,0 +1,27 @@
+[build]
+  base = "frontend/"
+  publish = "frontend/dist/"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "8"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  VITE_API_URL = "https://student-mess-app-production.up.railway.app/api"
+
+[context.branch-deploy.environment]  
+  VITE_API_URL = "https://student-mess-app-production.up.railway.app/api"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
